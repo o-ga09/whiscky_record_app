@@ -3,7 +3,7 @@
     <div>
       <h1>Routing Test Page</h1>
       <button class="record"><router-link class="link" to="/record"><h3>記録する</h3></router-link></button>
-      <button class="photo"><router-link class="link" to="/photo"><h3>写真を撮る</h3></router-link></button>
+      <button class="photo"><label for="picture">写真を撮る</label><input id="picture" type="file" accept="image/*" capture="environment"></button>
       <button class="history"><router-link class="link" to="/history"><h3>履歴を見る</h3></router-link></button>
     </div>
   </div>
@@ -68,5 +68,19 @@ export default {
     top: 431px;
     margin-top: 5px;
     margin-bottom: 5px;
+}
+
+label {
+  color: #0000EE;
+  font-size: 120%;
+  font-weight: bold;
+}
+
+input {
+  display: none;
+}
+
+a {
+  color: #0000EE
 }
 </style>
