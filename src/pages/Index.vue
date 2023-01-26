@@ -112,35 +112,45 @@ img {
   display: flex;
   align-items: flex-end;
   text-align: center;
+  width: 100%;
+  height: 150px;
+  position: absolute;
+  top: calc(100vh - 150px);
 
   color: #000000;
 }
 
-.form .form1 {
+.form1 {
   position: absolute;
   width: 153px;
-  height: 23px;
-  left: 118px;
-  top: 671px;
+  height: 25px;
+  top: 10%;
   text-decoration-line: underline;
+  margin: auto;
+  right: 0px;
+  left: 0px;
 }
 
-.form .form2 {
+.form2 {
   position: absolute;
   width: 153px;
-  height: 23px;
-  left: 118px;
-  top: 705px;
+  height: 25px;
+  top: 30%;
   text-decoration-line: underline;
+  margin: auto;
+  right: 0px;
+  left: 0px;
 }
 
-.form .form3 {
+.form3 {
   position: absolute;
   width: 153px;
-  height: 23px;
-  left: 118px;
-  top: 742px;
+  height: 25px;
+  top: 60%;
   text-decoration-line: underline;
+  margin: auto;
+  right: 0px;
+  left: 0px;
 }
 
 .form li {
@@ -170,7 +180,7 @@ body {
   left: 0;
   top: 0;
   width: 100%;
-  height: calc(100vh + 20px);
+  height: 100vh;
   /*--- end ---*/
   
   /*--- layout ---*/
