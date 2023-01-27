@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-    <img src="../assets/Wallpaper_Splatoon3_2022_2_1242_2688.jpg">
+    <!-- <img src="../assets/Wallpaper_Splatoon3_2022_2_1242_2688.jpg"> -->
         <div class="Title">
             <h2>Title</h2>
         </div>
@@ -25,6 +25,7 @@
         </div>
 
         <div class="form">
+          <div class="wrap">
             <li class="form1">
                 <router-link to="/policy">プライバシーポリシー</router-link>
             </li>
@@ -34,6 +35,7 @@
             <li class="form3">
                 <router-link to="/contact">お問い合わせ</router-link>
             </li>
+          </div>
         </div>
     </div>
 </template>
@@ -89,8 +91,7 @@ img {
   position: absolute;
   width: 127px;
   height: 37px;
-  left: 133px;
-  top: 599px;
+
   border-radius: 64px;
   background: #94F192;
   padding: 0px;
@@ -122,32 +123,34 @@ img {
 
 .form1 {
   position: absolute;
-  width: 153px;
+  width: 40%;
   height: 25px;
-  top: 10%;
+  margin-top: 12.5px;
+  margin-bottom: 25px;
   text-decoration-line: underline;
-  margin: auto;
-  right: 0px;
-  left: 0px;
 }
 
 .form2 {
   position: absolute;
-  width: 153px;
+  width: 40%;
   height: 25px;
-  top: 30%;
+  margin-top: 62.5px;
+  margin-bottom: 25px;
   text-decoration-line: underline;
-  margin: auto;
-  right: 0px;
-  left: 0px;
 }
 
 .form3 {
   position: absolute;
-  width: 153px;
+  width: 40%;
   height: 25px;
-  top: 60%;
+  margin-top: 112.5px;
+  margin-bottom: 12.5px;
   text-decoration-line: underline;
+}
+
+.wrap {
+  width: 40%;
+  height: 150px;
   margin: auto;
   right: 0px;
   left: 0px;
@@ -180,7 +183,8 @@ body {
   left: 0;
   top: 0;
   width: 100%;
-  height: 100vh;
+  height: 200px;
+  top: calc(100vh - 350px);
   /*--- end ---*/
   
   /*--- layout ---*/
