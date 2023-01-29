@@ -21,12 +21,21 @@
           
           <transition name="login">
             <div class="surface" v-if="show">
-                <p>testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest</p>
-                <br>
-                <p>testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest</p>
+                <div class="userid">
+                  <label>ユーザーID</label>
+                  <input type="text"  />
+                </div>
+                <div class="password">
+                  <label>パスワード</label>
+                  <input type="password" />
+                </div>
+                <div class="caution">
+                  <p>ログインをすると<router-link to="/Terms_of_service">利用規約</router-link>および<router-link to="/policy">プライバシーポリシー</router-link>に同意したものとみなす。</p>
+                </div>
                 <div class="login">
                   <button class="login-button"><router-link class="link" to="/menu"><h3>ログインする</h3></router-link></button>
                   <br>
+                  <router-link class="link_guest" to="/menu">ゲストとしてログインする</router-link>
                   <a v-on:click="show=!show;isopen = !isopen">キャンセル</a>
                 </div>
             </div>
@@ -72,7 +81,7 @@ img {
 .Title {
   position: absolute;
   width: 322px;
-  height: 100px;
+  height: 10%;
   margin: auto;
   left: 0px;
   right: 0px;
@@ -139,9 +148,9 @@ img {
   align-items: flex-end;
   text-align: center;
   width: 100%;
-  height: 150px;
+  height: 25%;
   position: absolute;
-  top: calc(100vh - 150px);
+  top: calc(100vh - 25%);
 
   color: #000000;
 }
@@ -175,7 +184,7 @@ img {
 
 .wrap {
   width: 40%;
-  height: 150px;
+  height: 25%;
   margin: auto;
   right: 0px;
   left: 0px;
@@ -208,8 +217,8 @@ body {
   left: 0;
   top: 0;
   width: 100%;
-  height: 200px;
-  top: calc(100vh - 350px);
+  height: 25%;
+  top: calc(100vh - 50%);
   /*--- end ---*/
   
   /*--- layout ---*/
@@ -299,13 +308,62 @@ body {
   position: relative;
   width: 100%;
   height: 100px;
-  top: calc(100vh - 890px);
+  top: 0;
 }
 
 .wrap-box1 {
   position: relative;
   width: 100%;
-  height: 240px;
-  top: calc(100vh - 790px)  
+  height: 30%;
+  top: calc(100vh - 90%)  
 }
+
+.userid {
+  position: absolute;
+  width: 100%;
+  height: 20%;
+}
+
+.password {
+  position: absolute;
+  width: 100%;
+  height: 20%;
+  top: 20%;
+}
+
+.userid label,
+.password label {
+  color: #000000;
+}
+
+input {
+  position: absolute;
+  height: 25%;
+  width: 60%;
+  top: 50%;
+  left: 0px;
+  right: 0px;
+  margin: auto;
+}
+
+.caution {
+  color: #000000;
+  position: absolute;
+  width: 100%;
+  height: 20%;
+  top: 45%;
+}
+
+.caution p {
+  width: 80%;
+  word-wrap: break-word;
+  margin: auto;
+}
+
+.login .link_guest {
+  position: absolute;
+  bottom: 24px;
+  text-decoration: none;
+}
+
 </style>
