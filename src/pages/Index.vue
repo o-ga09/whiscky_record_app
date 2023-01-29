@@ -1,25 +1,34 @@
 <template>
     <div id="app">
     <!-- <img src="../assets/Wallpaper_Splatoon3_2022_2_1242_2688.jpg"> -->
-        <div class="Title">
+        <div class="wrap-title">
+          <div class="Title">
             <h2>Title</h2>
+          </div>
         </div>
-        <div class="box1">
         
+        <div class="wrap-box1">
+          <div class="box1">
+          </div>
         </div>
 
         <div 
-            class="alert" 
+            v-bind:class="{'alert' : !isopen,'alert-open' : isopen}"
           >
-          <button class="box2" v-on:click="show = !show"><h3>はじめてみる</h3></button>
+          <div class="box2">
+            <button class="next-button" v-show="!show" v-on:click="show = !show; isopen = !isopen"><h3>はじめてみる</h3></button>
+          </div>
+          
           <transition name="login">
             <div class="surface" v-if="show">
-              <div class="alert-body">
                 <p>testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest</p>
                 <br>
                 <p>testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest</p>
-                <button class="login"><router-link class="link" to="/menu"><h3>ログインする</h3></router-link></button>
-              </div>
+                <div class="login">
+                  <button class="login-button"><router-link class="link" to="/menu"><h3>ログインする</h3></router-link></button>
+                  <br>
+                  <a v-on:click="show=!show;isopen = !isopen">キャンセル</a>
+                </div>
             </div>
           </transition>
         </div>
@@ -45,7 +54,8 @@ export default {
   name: 'MainPage',
   data () {
     return {
-      show: false
+      show: false,
+      isopen: false
     }
   }
 }
@@ -62,9 +72,10 @@ img {
 .Title {
   position: absolute;
   width: 322px;
-  height: 37px;
-  left: 34px;
-  top: 174px;
+  height: 100px;
+  margin: auto;
+  left: 0px;
+  right: 0px;
 
   font-family: 'Abel';
   font-style: normal;
@@ -77,11 +88,10 @@ img {
 }
 
 .box1 {
-  position: absolute;
+  position: relative;
   width: 322px;
   height: 236px;
-  left: 34px;
-  top: 266px;
+  margin: auto;
   background: #F2DF9A;
   border: 2px solid #F2DF9A;
   border-radius: 64px;
@@ -89,17 +99,32 @@ img {
 
 .box2 {
   position: absolute;
+  width: 100%;
+  height: 127px;
+}
+
+.next-button {
+  position: absolute;
   width: 127px;
   height: 37px;
+  top: 50%;
+  left: 0px;
+  right: 0px;
+  margin: auto;
 
   border-radius: 64px;
   background: #94F192;
   padding: 0px;
 }
 
-.box2 h3 {
-  left: 133px;
-  top: 599px;
+.next-button h3 {
+  position: absolute;
+  width: 127px;
+  height: 37px;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  margin: auto;
   margin-top: 5px;
   margin-bottom: 5px;
 }
@@ -195,26 +220,32 @@ body {
   
 }
 
+.alert-open {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+
 .surface {
     /*--- style ---*/
-    background-color: #424242;
+    background-color: #FFFFFF;
     color: white;
-    max-height: calc(100% - 96px);
-    width: 80%;
+    height: 50%;
+    width: 100%;
     max-width: 600px;
     box-shadow: 
       0px 11px 15px -7px rgba(0, 0, 0, 0.2),
       0px 24px 38px 3px rgba(0, 0, 0, 0.14),
       0px 9px 46px 8px rgba(0, 0, 0, 0.12);
-    border-radius: 64px;
+    border-radius: 64px 64px 0px 0px;
     position: relative;
     overflow-y: auto;
+    top: calc(100vh - 50%);
+    word-wrap: break-word;
     /*--- end --- */
-    
-    /*--- layout ---*/
-    display: flex;
-    flex-direction: column;
-    /*--- end ---*/
   }
 
   .surface .alert-body {
@@ -223,25 +254,58 @@ body {
     background: #FFFFFF;
     font-size: 1rem;
     font-weight: 400;
-    letter-spacing: 0.00938em;
+
     line-height: 1.5;
     padding: 0 24px 24px;
-    overflow-y: auto;
-    white-space: pre-wrap;
-    word-wrap: break-word;
+
+    
     /*--- end ---*/
   }
 
 .login {
+    position: absolute;
+    width: 100%;
+    height: 25%;
+    top: calc(100% - 30%);
+}
+
+.login-button {
+    position: absolute;
     width: 219px;
     height: 51px;
     border-radius: 64px;
     background: #F2DF9A;
     padding: 0px;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+    top: 0px;
+}
+
+.login > a {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  margin: auto;
+  bottom: 0px;
 }
 
 .login h3 {
     margin-top: 5px;
     margin-bottom: 5px;
+}
+
+.wrap-title {
+  position: relative;
+  width: 100%;
+  height: 100px;
+  top: calc(100vh - 890px);
+}
+
+.wrap-box1 {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  top: calc(100vh - 790px)  
 }
 </style>
