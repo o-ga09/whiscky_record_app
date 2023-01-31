@@ -2,7 +2,7 @@
         <div 
             v-bind:class="{'InputInfo' : !isopen,'InputInfo-open' : isopen}"
         >
-          <button class="record-button" v-show="!show" v-on:click="show = !show; isopen = !isopen"><h3>記録する</h3></button>
+          <button class="record-button" v-on:click="show = !show; isopen = !isopen"><h3>記録する</h3></button>
           
           <transition name="record">
             <div class="surface" v-if="show">
@@ -39,10 +39,11 @@ export default {
 <style>
 .InputInfo {
   /*--- style ---*/
-  position: absolute;
+  position: fixed;
   top: 0;
   width: 100%;
-  height: 20%;
+  height: 15%;
+  top: calc(100vh - 73%);
   /*--- end ---*/
   
   /*--- layout ---*/
@@ -102,17 +103,17 @@ export default {
     top: calc(100% - 30%);
 }
 
-.record-button {
+.InputInfo-open .record-button {
     position: absolute;
-    width: 219px;
-    height: 51px;
+    width: 40%;
+    height: 7.5%;
     border-radius: 64px;
     background: #F2DF9A;
     padding: 0px;
     left: 0px;
     right: 0px;
     margin: auto;
-    top: 0px;
+    top: calc(100vh - 70%);
 }
 
 .record > a {
@@ -171,7 +172,7 @@ export default {
 .record-button {
   position: absolute;
   width: 40%;
-  height: 100%;
+  height: 50%;
 
   border-radius: 64px;
   background: #F2DF9A;

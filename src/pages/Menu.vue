@@ -2,12 +2,15 @@
   <div>
     <div>
       <h1>Routing Test Page</h1>
-      <div class="button">
-          <RecordForm />
-        <div class="wrap-button">
-          <button class="photo"><label for="picture">写真を撮る</label><input id="picture" type="file" accept="image/*" capture="environment"></button>
-          <button class="history"><router-link class="link" to="/history"><h3>履歴を見る</h3></router-link></button>
-        </div>
+      <div class="button-RecordForm">
+        <RecordForm />
+      </div>
+      <div class="button-photo">
+        <button class="photo"><label for="picture">写真を撮る</label><input id="picture" type="file" accept="image/*" capture="environment"></button>
+      </div>
+
+      <div class="button-history">   
+        <button class="history"><router-link class="link" to="/history"><h3>履歴を見る</h3></router-link></button>
       </div>
     </div>
   </div>
@@ -42,11 +45,14 @@ export default {
 .photo {
     position: absolute;
     width: 40%;
-    height: 20%;
+    height: 50%;
     border-radius: 64px;
     background: #F2DF9A;
     padding: 0px;
     top: 40%;
+    left: 0px;
+    right: 0px;
+    margin: auto;
 }
 
 .photo h3 {
@@ -56,14 +62,20 @@ export default {
     margin-bottom: 5px;
 }
 
+.photo > input {
+  display: none;
+}
+
 .history {
     position: absolute;
     width: 40%;
-    height: 20%;
+    height: 50%;
     border-radius: 64px;
     background: #F2DF9A;
     padding: 0px;
-    bottom: 0;
+    left: 0px;
+    right: 0px;
+    margin: auto;
 }
 
 .history h3 {
@@ -79,19 +91,22 @@ label {
   font-weight: bold;
 }
 
-input {
-  display: none;
-}
-
 a {
   color: #0000EE
 }
 
-.button {
+.button-photo {
   position: absolute;
   width: 100%;
-  height: 50%;
-  top: calc(100vh - 75%);
+  height: 15%;
+  top: calc(100vh - 65%);
+}
+
+.button-history {
+  position: absolute;
+  width: 100%;
+  height: 15%;
+  top: calc(100vh - 50%);
 }
 
 .wrap-button {
@@ -100,5 +115,12 @@ a {
   margin: auto;
   left: 0px;
   right: 0px;
+}
+
+.button-RecordForm {
+  left: 0;
+  width: 100%;
+  height: 15%;
+  top: calc(100vh - 80%);
 }
 </style>
