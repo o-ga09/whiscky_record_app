@@ -2,9 +2,7 @@
   <div>
     <div>
       <h1>Routing Test Page</h1>
-      <div class="button-RecordForm">
-        <RecordForm />
-      </div>
+      <RecordForm />
       <div class="button-photo">
         <button class="photo"><label for="picture">写真を撮る</label><input id="picture" type="file" accept="image/*" capture="environment"></button>
       </div>
@@ -53,6 +51,7 @@ export default {
     left: 0px;
     right: 0px;
     margin: auto;
+    bottom: 0px;
 }
 
 .photo h3 {
@@ -98,14 +97,14 @@ a {
 .button-photo {
   position: absolute;
   width: 100%;
-  height: 15%;
+  height: 10%;
   top: calc(100vh - 65%);
 }
 
 .button-history {
   position: absolute;
   width: 100%;
-  height: 15%;
+  height: 10%;
   top: calc(100vh - 50%);
 }
 
