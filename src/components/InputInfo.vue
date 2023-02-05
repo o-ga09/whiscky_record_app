@@ -15,7 +15,7 @@
                   <p>ログインをすると<router-link to="/Terms_of_service">利用規約</router-link>および<router-link to="/policy">プライバシーポリシー</router-link>に同意したものとみなす。</p>
                 </div>
                 <div class="record">
-                  <button class="record-button"><router-link class="link" to="/menu"><h3>記録する</h3></router-link></button>
+                  <button class="record-info-button"><router-link class="link" to="/menu"><h3>記録する</h3></router-link></button>
                   <br>
                   <a v-on:click="show=!show;isopen = !isopen">キャンセル</a>
                 </div>
@@ -42,8 +42,7 @@ export default {
   position: fixed;
   top: 0;
   width: 100%;
-  height: 15%;
-  top: calc(100vh - 73%);
+  height:100%;
   /*--- end ---*/
   
   /*--- layout ---*/
@@ -103,7 +102,7 @@ export default {
     top: calc(100% - 30%);
 }
 
-.InputInfo-open .record-button {
+.InputInfo-open .record-info-button {
     position: absolute;
     width: 40%;
     height: 7.5%;
@@ -113,7 +112,6 @@ export default {
     left: 0px;
     right: 0px;
     margin: auto;
-    top: calc(100vh - 70%);
 }
 
 .record > a {
@@ -172,7 +170,7 @@ export default {
 .record-button {
   position: absolute;
   width: 40%;
-  height: 50%;
+  height: calc(100vh * 0.1 * 0.5);
 
   border-radius: 64px;
   background: #F2DF9A;
@@ -180,6 +178,7 @@ export default {
   left: 0px;
   right: 0px;
   margin: auto;
+  top: calc(100vh - 72%);
 }
 
 .record-enter-active, .record-leave-active {
