@@ -9,11 +9,12 @@
                 <div class="whisck-name">
                   <label>ウイスキーの名前</label>
                   <input type="text" v-show="show"/>
+                  <label>次も飲む？
+
+                    
+                  </label>
                 </div>
 
-                <div class="caution">
-                  <p>ログインをすると<router-link to="/Terms_of_service">利用規約</router-link>および<router-link to="/policy">プライバシーポリシー</router-link>に同意したものとみなす。</p>
-                </div>
                 <div class="record">
                   <button class="record-info-button"><router-link class="link" to="/menu"><h3>記録する</h3></router-link></button>
                   <br>
@@ -105,7 +106,7 @@ export default {
 .InputInfo-open .record-info-button {
     position: absolute;
     width: 40%;
-    height: 7.5%;
+    height: 50%;
     border-radius: 64px;
     background: #F2DF9A;
     padding: 0px;
@@ -200,5 +201,9 @@ export default {
   margin: auto;
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+.record > a {
+  text-align: center;
 }
 </style>
