@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Policy from './pages/Policy.vue'
-import Index from './pages/Index.vue'
+import IndexPc from './pages/Index_pc.vue'
+import IndexSp from './pages/Index_sp.vue'
 import Menu from './pages/Menu.vue'
 import History from './pages/history.vue'
 
@@ -12,9 +13,14 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
-      name: 'MainPage',
-      component: Index
+      path: '/pc',
+      name: 'MainPage_pc',
+      component: IndexPc
+    },
+    {
+      path: '/sp',
+      name: 'MainPage_sp',
+      component: IndexSp
     },
     {
       path: '/menu',
