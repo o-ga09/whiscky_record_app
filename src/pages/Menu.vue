@@ -1,129 +1,43 @@
 <template>
-  <div id="menu">
-    <div>
-      <h1>Routing Test Page</h1>
-      <RecordForm />
-      <div class="button-photo">
-        <button class="photo"><label for="picture">写真を撮る</label><input id="picture" type="file" accept="image/*" capture="environment"></button>
-      </div>
+    <div class="w-full">
+      <HeaderComponet title="メニュー" class="h-2/5 mb-10 font-bold text-2xl md:text-4xl bg-amber-200"/>
+      <main class="h-auto w-4/5 md:w-1/2 left-0 right-0 m-auto">
+        <div class="top-1/2 w-1/2 grid gap-10 grid-cols-1 grid-rows-3 left-0 right-0 m-auto">
+            <button name="submit"
+                    class="rounded-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
+                    type="submit">
+                <router-link to="/form">記録する</router-link>
+            </button>
 
-      <div class="button-history">   
-        <button class="history"><router-link class="link" to="/history"><h3>履歴を見る</h3></router-link></button>
-      </div>
+            <button name="submit"
+                    @click="selectFile"
+                    class="rounded-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
+                    type="submit">
+                <input class="hidden" ref="fileInput" id="picture" type="file" accept="image/*" capture="environment">
+                写真を撮る
+            </button>
+
+            <button name="submit"
+                    class="rounded-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
+                    type="submit">
+                <router-link to="/history">履歴を見る</router-link>
+            </button>
+        </div>
+      </main>
+      <FooterComponet class="absolute w-full bottom-0 justify-center bg-amber-200"/>
     </div>
-  </div>
 </template>
 
 <script>
-import RecordForm from '../components/InputInfo.vue'
+import FooterComponet from '../components/Footer.vue'
+import HeaderComponet from '../components/Header.vue'
 export default {
-  name: 'HistoryPage',
-  components: {RecordForm}
+  components: {FooterComponet,HeaderComponet},
+  name: 'MenuPage',
+  methods: {
+    selectFile() {
+      this.$refs.fileInput.click();
+    }
+  }
 }
 </script>
-
-<style>
-#menu {
-  text-align: center;
-}
-
-.wrap-recordinfo {
-    position: absolute;
-    width: 40%;
-    height: 20%;
-    border-radius: 64px;
-    background: #F2DF9A;
-    padding: 0px;
-    top: 0;
-}
-
-.wrap-recordinfo h3 {
-    left: 89px;
-    top: 287px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-.photo {
-    position: absolute;
-    width: 40%;
-    height: 50%;
-    border-radius: 64px;
-    background: #F2DF9A;
-    padding: 0px;
-    top: 40%;
-    left: 0px;
-    right: 0px;
-    margin: auto;
-    bottom: 0px;
-}
-
-.photo h3 {
-    left: 89px;
-    top: 359px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-.photo > input {
-  display: none;
-}
-
-.history {
-    position: absolute;
-    width: 40%;
-    height: 50%;
-    border-radius: 64px;
-    background: #F2DF9A;
-    padding: 0px;
-    left: 0px;
-    right: 0px;
-    margin: auto;
-}
-
-.history h3 {
-    left: 89px;
-    top: 431px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-label {
-  color: #0000EE;
-  font-size: 120%;
-  font-weight: bold;
-}
-
-a {
-  color: #0000EE
-}
-
-.button-photo {
-  position: absolute;
-  width: 100%;
-  height: 10%;
-  top: calc(100vh - 65%);
-}
-
-.button-history {
-  position: absolute;
-  width: 100%;
-  height: 10%;
-  top: calc(100vh - 50%);
-}
-
-.wrap-button {
-  width: 40%;
-  height: 100%;
-  margin: auto;
-  left: 0px;
-  right: 0px;
-}
-
-.button-RecordForm {
-  left: 0;
-  width: 100%;
-  height: 15%;
-  top: calc(100vh - 80%);
-}
-</style>
