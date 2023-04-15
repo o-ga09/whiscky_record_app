@@ -6,11 +6,7 @@
 
 <script>
 export default {
-  name: 'App',
-  mounted() {
-    window.addEventListener('resize', this.handleResize)
-    this.handleResize()
-  },
+  name: 'App'
 }
 </script>
 
