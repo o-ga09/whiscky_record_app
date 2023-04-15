@@ -7,9 +7,3 @@ export default {
     name: 'FooterCopmonent'
 }
 </script>
-
-<style>
-p {
-    text-align: center;
-}
-</style>
