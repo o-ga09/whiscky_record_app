@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Policy from './pages/Policy.vue'
-import IndexPc from './pages/Index_pc.vue'
-import IndexSp from './pages/Index_sp.vue'
+import IndexPc from './pages/Index.vue'
 import Menu from './pages/Menu.vue'
 import History from './pages/history.vue'
+import Form from './pages/InputForm.vue'
 
 Vue.use(Router)
 
@@ -13,14 +13,9 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/pc',
-      name: 'MainPage_pc',
+      path: '/',
+      name: 'MainPage',
       component: IndexPc
-    },
-    {
-      path: '/sp',
-      name: 'MainPage_sp',
-      component: IndexSp
     },
     {
       path: '/menu',
@@ -31,6 +26,11 @@ export default new Router({
       path: '/history',
       name: 'HistoryPage',
       component: History
+    },
+    {
+      path: '/form',
+      name: 'InputForm',
+      component: Form
     },
     {
       path: '/policy',
