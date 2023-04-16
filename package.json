@@ -12,6 +12,8 @@
     "@mdi/font": "^7.2.96",
     "@mdi/js": "^7.2.96",
     "core-js": "^3.8.3",
+    "firebase": "^9.19.1",
+    "sweetalert2": "^11.7.3",
     "vue": "^2.7.14",
     "vue-material-design-icons": "^5.2.0",
     "vue-router": "3.0.7"

@@ -7,8 +7,8 @@
                 <input type="text" class="w-1/3 px-3 py-2 border border-gray-300 rounded-md shadow-sm border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                 <h2 class="text-lg font-medium">次も飲みたいですか</h2>
                 <div class="flex space-x-4 justify-center">
-                    <svg-icon class="w-6 h-6 text-blue-500" type="mdi" :path="like"></svg-icon>
-                    <svg-icon class="w-6 h-6 text-red-500" type="mdi" :path="dislike"></svg-icon>
+                    <button @click="good"> <svg-icon class="w-6 h-6 text-blue-500" type="mdi" :path="like"></svg-icon></button>
+                    <button @click="bad"><svg-icon class="w-6 h-6 text-red-500" type="mdi" :path="dislike"></svg-icon></button>
                 </div>
                 <div class="mb-4">
                     <button class="inline-flex items-center px-4 py-2 border border-transparent rounded-full shadow-sm text-base font-medium text-white bg-green-500 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
@@ -23,6 +23,7 @@
 
 <script>
 import SvgIcon from '@jamescoyle/vue-icon';
+import Swal from 'sweetalert2';
 import { mdiThumbUp } from '@mdi/js';
 import { mdiThumbDown } from '@mdi/js';
 import HeaderComponent from '../components/Header.vue'
@@ -38,7 +39,28 @@ export default {
     data() {
         return{
             like: mdiThumbUp,
-            dislike: mdiThumbDown
+            dislike: mdiThumbDown,
+            evaluate: 0
+        }
+    },
+    methods: {
+        good() {
+            this.evaluate = 1
+            Swal.fire({
+                title: 'Good',
+                text: 'You clicked good button!',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            })
+        },
+        bad() {
+            this.evaluate = 0
+            Swal.fire({
+                title: 'Bad',
+                text: 'You clicked bad button!',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            })
         }
     }
 }
