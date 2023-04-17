@@ -23,6 +23,14 @@
                 <router-link to="/history">履歴を見る</router-link>
             </button>
         </div>
+        
+        <!-- TODO: ログアウトボタンを実装 -->
+         <button name="submit"
+                @click="signout"
+                class="rounded-full bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
+                type="submit">
+            ログアウト
+        </button>
       </main>
       <FooterComponet class="absolute w-full bottom-0 justify-center bg-amber-200"/>
     </div>
@@ -31,12 +39,23 @@
 <script>
 import FooterComponet from '../components/Footer.vue'
 import HeaderComponet from '../components/Header.vue'
+import { getAuth, signOut } from "firebase/auth";
 export default {
   components: {FooterComponet,HeaderComponet},
   name: 'MenuPage',
   methods: {
     selectFile() {
       this.$refs.fileInput.click();
+    },
+    signout() {
+        //TODO: サインアウトを実装
+        //ref:  https://firebase.google.com/docs/auth/web/google-signin?hl=ja
+        const auth = getAuth();
+        signOut(auth).then(() => {
+          // Sign-out successful.
+        }).catch((error) => {
+          // An error happened.
+        });
     }
   }
 }
