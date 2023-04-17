@@ -43,9 +43,23 @@ import { getAuth, signOut } from "firebase/auth";
 export default {
   components: {FooterComponet,HeaderComponet},
   name: 'MenuPage',
+  data: {
+    return (
+        resizeLimitPixel: 320,
+        targetImage: null
+    )
+  },
   methods: {
     selectFile() {
       this.$refs.fileInput.click();
+    },
+    getFileAsBase64(filepath) {
+        //TODO: 選択された画像をbase64化する
+        //ref: https://qiita.com/hoshimado/items/7b9f73f9f146a66e2502
+    },
+    resizeImgForreview(loadfile,canvas) {
+        //TODO: base64化された画像をプレビューする
+        //ref: https://qiita.com/hoshimado/items/7b9f73f9f146a66e2502
     },
     signout() {
         //TODO: サインアウトを実装
