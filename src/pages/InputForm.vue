@@ -11,8 +11,8 @@
                     <button @click="bad"><svg-icon class="w-6 h-6 text-red-500" type="mdi" :path="dislike"></svg-icon></button>
                 </div>
                 <div class="mb-4">
-                    <button class="inline-flex items-center px-4 py-2 border border-transparent rounded-full shadow-sm text-base font-medium text-white bg-green-500 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                        <router-link to="/history">登録する</router-link>
+                    <button @click="send" class="inline-flex items-center px-4 py-2 border border-transparent rounded-full shadow-sm text-base font-medium text-white bg-green-500 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        登録する
                     </button>
                 </div>
             </div>
@@ -24,10 +24,14 @@
 <script>
 import SvgIcon from '@jamescoyle/vue-icon';
 import Swal from 'sweetalert2';
+import axios from 'axios';
 import { mdiThumbUp } from '@mdi/js';
 import { mdiThumbDown } from '@mdi/js';
 import HeaderComponent from '../components/Header.vue'
 import FooterComponent from '../components/Footer.vue'
+
+const URL = "http://localhost:8080/api"
+const TOKEN = "hoge" //TODO: index.vueからgoogleログインで取得したuser.uidをもらうように実装する
 
 export default {
     name: 'InputForm',
@@ -40,7 +44,8 @@ export default {
         return{
             like: mdiThumbUp,
             dislike: mdiThumbDown,
-            evaluate: 0
+            evaluate: 0,
+            whicky_name* ""
         }
     },
     methods: {
@@ -61,6 +66,26 @@ export default {
                 icon: 'error',
                 confirmButtonText: 'OK'
             })
+        },
+        send() {
+            if (this.whicky_name === "" || this.evaluate === 0) {
+                 Swal.fire({
+                    title: 'Warning',
+                    text: '入力されていない項目があります。',
+                    icon: 'warning',
+                    confirmButtonText: 'OK'
+                })
+                return
+            }
+            axios.post(URL,{name: this.whicky_name, evaluate: this.evaluate},{headers: {"Content-Type": "application/json", "Authorization": 'Bearer' + TOKEN}})
+                  .then(() => {
+                    //TODO: status: 200の場合の処理を実装する
+                    
+                  })
+                  .catch(err => {
+                    //TODO: status: 200以外の場合の処理を実装する
+                    
+                  });
         }
     }
 }
