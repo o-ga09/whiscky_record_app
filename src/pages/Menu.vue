@@ -23,6 +23,13 @@
                 <router-link to="/history">履歴を見る</router-link>
             </button>
         </div>
+
+        <button name="submit"
+                @click="SignOut"
+                class="rounded-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
+                type="submit">
+            ログアウト
+        </button>
       </main>
       <FooterComponet class="absolute w-full bottom-0 justify-center bg-amber-200"/>
     </div>
@@ -37,6 +44,9 @@ export default {
   methods: {
     selectFile() {
       this.$refs.fileInput.click();
+    },
+    SignOut() {
+      this.$root.$emit('SignOut');
     }
   }
 }
