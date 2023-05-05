@@ -43,8 +43,9 @@
 </template>
 
 <script>
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 import { initializeApp } from "firebase/app";
+import Swal from 'sweetalert2';
 
 const firebaseConfig = {
   apiKey: process.env.VUE_APP_API_KEY,
@@ -69,19 +70,74 @@ export default {
       isopen: false
     }
   },
+  mounted() {
+    this.$root.$on('SignOut', () => {
+      this.SignOut()
+    })
+  },
   methods: {
     SighIn() {
     const vm = this;
     signInWithPopup(auth,provider)
-      .then((result) => {
-        console.log(result.user.uid);
-        vm.$router.push('/menu');
+      .then(() => {
+        auth.currentUser.getIdToken(/* forceRefresh */ true)
+          .then((token) => {
+            // idTokenをサーバーに送信する処理
+            const xhr = new XMLHttpRequest();
+            xhr.onload = function() {
+              if (xhr.status === 200) {
+                console.log(xhr.responseText);
+              }
+            };
+            xhr.onerror = function(error) {
+              console.log(error);
+            };
+
+            var created_at = auth.currentUser.metadata.creationTime;
+            var now = new Date();
+
+            if(created_at < now) {
+              xhr.open('POST', '/login');
+              xhr.setRequestHeader('Content-Type', 'application/json');
+              xhr.send(JSON.stringify({ "toke": btoa(token) }));
+              this.Success();
+              vm.$router.push('/menu');
+            } else {
+              xhr.open('POST', '/register');
+              xhr.setRequestHeader('Content-Type', 'application/json');
+              xhr.send(JSON.stringify({ "token": btoa(token) }));
+              this.Success();
+              vm.$router.push('/menu');
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       }).catch(() => {
         console.log("NG");
       });
     },
     WithOutSighIn(){
       this.$router.push('/menu');
+    },
+    SignOut() {
+      signOut(auth)
+        .then(() => {
+          this.Success();
+          this.$router.push('/');
+        })
+        .catch((error) => {
+          console.log(error);
+      });
+    },
+    Success() {
+        this.evaluate = 1
+        Swal.fire({
+            title: 'Success',
+            text: 'You Signed out',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        })
     }
   },
 };
