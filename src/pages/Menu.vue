@@ -69,9 +69,6 @@ export default {
     }
   },
   methods: {
-    selectFile() {
-      this.$refs.fileInput.click();
-    },
     SignOut() {
       this.$root.$emit('SignOut');
     },
