@@ -79,9 +79,7 @@ export default {
       const file = event.target.files[0]
       this.img_url = URL.createObjectURL(file);
       const storageRef = ref(storage,"files/"+file.name);
-      uploadBytes(storageRef,file).then((snapshot) => {
-        console.log("successfully uploaded",snapshot);
-      });
+      uploadBytes(storageRef,file);
     }
   }
 }
