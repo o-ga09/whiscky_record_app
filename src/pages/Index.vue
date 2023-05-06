@@ -46,6 +46,8 @@
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import Swal from 'sweetalert2';
+import 'firebase/storage'
+
 
 const firebaseConfig = {
   apiKey: process.env.VUE_APP_API_KEY,
@@ -54,7 +56,7 @@ const firebaseConfig = {
   storageBucket: process.env.VUE_APP_STORAGE_BACKET,
   messagingSenderId: process.env.VUE_APP_MESSAGING_ID,
   appId: process.env.VUE_APP_APP_ID,
-  measurementId: process.env.VUE_APP_MEASUREMENT_ID
+  measurementId: process.env.VUE_APP_MEASUREMENT_ID,
 };
 
 // Initialize Firebase
@@ -73,6 +75,9 @@ export default {
   mounted() {
     this.$root.$on('SignOut', () => {
       this.SignOut()
+    })
+    this.$root.$on('uploadImage',() => {
+      this.uploadImage()
     })
   },
   methods: {
