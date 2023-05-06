@@ -33,7 +33,7 @@
 
         <button name="submit"
                 @click="SignOut"
-                class="rounded-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
+                class="rounded-full mt-40 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
                 type="submit">
             ログアウト
         </button>
@@ -45,7 +45,7 @@
 <script>
 import FooterComponet from '../components/Footer.vue'
 import HeaderComponet from '../components/Header.vue'
-import { getStorage, ref, uploadBytes } from 'firebase/storage';
+import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
@@ -79,7 +79,13 @@ export default {
       const file = event.target.files[0]
       this.img_url = URL.createObjectURL(file);
       const storageRef = ref(storage,"files/"+file.name);
-      uploadBytes(storageRef,file);
+      uploadBytes(storageRef,file).then(() => {
+        getDownloadURL(storageRef).then((url) => {
+          console.log(url);
+        }).catch((error) => {
+          console.log(error);
+        });
+      });
     }
   }
 }
