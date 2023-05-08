@@ -20,7 +20,7 @@
                 type="file" 
                 accept="image/*" 
                 capture="environment" 
-                @change="uploadImage">
+                @change="UploadImage">
                 写真を撮る
             </label>
 
@@ -63,26 +63,27 @@ const storage = getStorage(app);
 export default {
   components: {FooterComponet,HeaderComponet},
   name: 'MenuPage',
-  data() {
-    return {
-      img_url: ""
+  computed: {
+    img_url() {
+      return this.$store.state.img_url
     }
+  },
+  mounted() {
+    this.$root.$on('UploadImage',(event) => {
+      this.UploadImage(event);
+    })
   },
   methods: {
     SignOut() {
       this.$root.$emit('SignOut');
     },
-    uploadImage(event) {
+    async UploadImage(event) {
       const file = event.target.files[0]
-      this.img_url = URL.createObjectURL(file);
+      this.$store.commit('setImgUrl',URL.createObjectURL(file));
       const storageRef = ref(storage,"files/"+file.name);
-      uploadBytes(storageRef,file).then(() => {
-        getDownloadURL(storageRef).then((url) => {
-          console.log(url);
-        }).catch((error) => {
-          console.log(error);
-        });
-      });
+      await uploadBytes(storageRef,file);
+      const res = await getDownloadURL(storageRef);
+      this.$store.commit('setImgUrl',res);
     }
   }
 }

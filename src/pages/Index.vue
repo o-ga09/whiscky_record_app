@@ -79,9 +79,6 @@ export default {
     this.$root.$on('SignOut', () => {
       this.SignOut()
     })
-    this.$root.$on('uploadImage',() => {
-      this.uploadImage()
-    })
   },
   methods: {
     async SighIn() {
