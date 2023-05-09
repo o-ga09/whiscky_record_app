@@ -5,7 +5,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    img_url: ""
+    img_url: "",
+    uid: 0
   },
   mutations: {
     setImgUrl(state,img) {

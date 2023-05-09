@@ -69,6 +69,11 @@ const BaseURL = "http://localhost:8080"
 
 export default {
   name: 'MainPage',
+  computed: {
+    uid() {
+      return this.$store.state.uid
+    }
+  },
   data () {
     return {
       show: false,
@@ -93,13 +98,13 @@ export default {
           const data = JSON.stringify(res.data);
           const json = JSON.parse(data);
           console.log("login");
-          sessionStorage.setItem('user_id', json.user_id);
+          this.uid = json.user_id;
         } else {
           const res = await axios.post(BaseURL + '/register', { "token": btoa(token) });
           const data = JSON.stringify(res.data);
           const json = JSON.parse(data);
           console.log("register");
-          sessionStorage.setItem('user_id', json.user_id);
+          this.uid = json.user_id;
         }
 
         this.Success();
@@ -114,7 +119,7 @@ export default {
     SignOut() {
       signOut(auth)
         .then(() => {
-          sessionStorage.removeItem('user_id');
+          this.uid = 0;
           this.Success();
           this.$router.push('/');
         })

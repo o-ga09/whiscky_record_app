@@ -60,6 +60,9 @@ export default {
     computed: {
       img_url() {
         return this.$store.state.img_url
+      },
+      uid() {
+        return this.$storage.state.uid
       }
     },
     data() {
@@ -94,12 +97,12 @@ export default {
             console.log(this.inputValue);
             console.log(this.evaluate);
             console.log(this.img_url);
-            console.log(sessionStorage.getItem("uid"));
+            console.log(this.uid);
             const res = await axios.post(BaseURL + '/record',{
-                "uid": sessionStorage.getItem("uid"),
+                "uid": this.uid,
                 "name": this.inputValue,
                 "evaluate": this.evaluate,
-                // "imageURL": this.img_url
+                "imageURL": this.img_url
             });
             const data = JSON.stringify(res.data);
             const json = JSON.parse(data);
