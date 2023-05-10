@@ -62,7 +62,7 @@ export default {
         return this.$store.state.img_url
       },
       uid() {
-        return this.$storage.state.uid
+        return this.$store.state.uid
       }
     },
     data() {
@@ -99,14 +99,13 @@ export default {
             console.log(this.img_url);
             console.log(this.uid);
             const res = await axios.post(BaseURL + '/record',{
-                "uid": this.uid,
+                "uid": String(this.uid),
                 "name": this.inputValue,
-                "evaluate": this.evaluate,
+                "evaluate": String(this.evaluate),
                 "imageURL": this.img_url
             });
             const data = JSON.stringify(res.data);
             const json = JSON.parse(data);
-
             if(res.status === 200){
                 Swal.fire({
                     title: 'Good',

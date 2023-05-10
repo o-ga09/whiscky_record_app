@@ -97,14 +97,12 @@ export default {
           const res = await axios.post(BaseURL + '/login', { "token": btoa(token) });
           const data = JSON.stringify(res.data);
           const json = JSON.parse(data);
-          console.log("login");
-          this.uid = json.user_id;
+          this.$store.commit('setUid',json.user_id);
         } else {
           const res = await axios.post(BaseURL + '/register', { "token": btoa(token) });
           const data = JSON.stringify(res.data);
           const json = JSON.parse(data);
-          console.log("register");
-          this.uid = json.user_id;
+          this.$store.commit('setUid',json.user_id);
         }
 
         this.Success();

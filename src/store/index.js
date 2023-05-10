@@ -11,6 +11,9 @@ export default new Vuex.Store({
   mutations: {
     setImgUrl(state,img) {
       state.img_url = img;
+    },
+    setUid(state,uid) {
+      state.uid = uid;
     }
   }
 })
