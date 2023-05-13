@@ -91,9 +91,9 @@ export default {
         await signInWithPopup(auth, provider);
         const token = await auth.currentUser.getIdToken(true);
         const created_at = new Date(auth.currentUser.metadata.creationTime);
-        const now = new Date();
+        const loggedin_at = new Date(auth.currentUser.metadata.lastSignInTime);
 
-        if (created_at < now) {
+        if (created_at < loggedin_at) {
           const res = await axios.post(BaseURL + '/login', { "token": btoa(token) });
           const data = JSON.stringify(res.data);
           const json = JSON.parse(data);
@@ -117,7 +117,7 @@ export default {
     SignOut() {
       signOut(auth)
         .then(() => {
-          this.uid = 0;
+          this.uid = "";
           this.Success();
           this.$router.push('/');
         })
