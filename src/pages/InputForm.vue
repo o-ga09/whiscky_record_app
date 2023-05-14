@@ -4,12 +4,22 @@
         <div class="flex flex-col justify-between h-3/5">
             <div class="space-y-4">
                 <h2 class="text-lg font-medium">ウイスキーの名前を入力してください</h2>
-                <input v-model="inputValue" type="text" class="w-1/3 px-3 py-2 border border-gray-300 rounded-md shadow-sm border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                <input v-model="whicky_name" type="text" class="w-1/3 px-3 py-2 border border-gray-300 rounded-md shadow-sm border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                 <h2 class="text-lg font-medium">次も飲みたいですか</h2>
                 <div class="flex space-x-4 justify-center">
                     <button @click="good"> <svg-icon class="w-6 h-6 text-blue-500" type="mdi" :path="like"></svg-icon></button>
                     <button @click="bad"><svg-icon class="w-6 h-6 text-red-500" type="mdi" :path="dislike"></svg-icon></button>
                 </div>
+                
+                <div>
+                    <label>味は好きですか？</label>
+                    <input v-model="taste" type="text" class="w-1/3 px-3 py-2 border border-gray-300 rounded-md shadow-sm border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <div>
+                    <label>香りは好きですか？</label>
+                    <input v-model="smell" type="text" class="w-1/3 px-3 py-2 border border-gray-300 rounded-md shadow-sm border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                </div> 
 
                 <div class="flex space-x-4 justify-center">
                     <div class="">
@@ -71,7 +81,9 @@ export default {
             dislike: mdiThumbDown,
             camera: mdiCamera,
             evaluate: 0,
-            inputValue: ''
+            whicky_name: '',
+            taste: "",
+            smell: "",
         }
     },
     methods: {
@@ -94,14 +106,12 @@ export default {
             })
         },
         async submitForm() {
-            console.log(this.inputValue);
-            console.log(this.evaluate);
-            console.log(this.img_url);
-            console.log(this.uid);
             const res = await axios.post(BaseURL + '/record',{
                 "uid": String(this.uid),
-                "name": this.inputValue,
+                "name": this.whicky_name,
                 "evaluate": String(this.evaluate),
+                "taste": this.taste,
+                "smell": this.smell,
                 "imageURL": this.img_url
             });
             const data = JSON.stringify(res.data);
