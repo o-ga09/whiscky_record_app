@@ -1,24 +1,18 @@
 <template>
   <div class="w-full">
     <HeaderComponet title="履歴" class="h-2/5 mb-10 font-bold text-2xl md:text-4xl bg-amber-200"/>
-    <table v-if="items.length">
-      <thead>
-        <tr>
-          <th>名前</th>
-          <th>飲んだ日付</th>
-          <th>評価</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="item in items" :key="item.id">
-          <td>{{ item.name }}</td>
-          <td>{{ item.drankAt }}</td>
-          <td>{{ item.evaluate }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4" v-if="items.length">
+      <div v-for="(item, index) in items" :key="index">
+        <img :src="item.image" alt="item.title" class="w-full">
+        <div class="p-4">
+          <h3 class="font-bold text-xl">{{ item.title }}</h3>
+          <p class="mt-2">{{ item.description }}</p>
+        </div>
+      </div>
+    </div>
     <p v-else>データがありません</p>
-    <FooterComponet class="absolute w-full bottom-0 justify-center bg-amber-200"/>
+    <FooterComponet class="flex w-full bottom-0 justify-center bg-amber-200" v-if="items.length"/>
+    <FooterComponet class="absolute w-full bottom-0 justify-center bg-amber-200" v-else/>
   </div>
 </template>
 
