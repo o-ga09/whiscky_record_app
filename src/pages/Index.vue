@@ -46,6 +46,9 @@
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import Swal from 'sweetalert2';
+import 'firebase/storage'
+import axios from 'axios';
+
 
 const firebaseConfig = {
   apiKey: process.env.VUE_APP_API_KEY,
@@ -54,7 +57,7 @@ const firebaseConfig = {
   storageBucket: process.env.VUE_APP_STORAGE_BACKET,
   messagingSenderId: process.env.VUE_APP_MESSAGING_ID,
   appId: process.env.VUE_APP_APP_ID,
-  measurementId: process.env.VUE_APP_MEASUREMENT_ID
+  measurementId: process.env.VUE_APP_MEASUREMENT_ID,
 };
 
 // Initialize Firebase
@@ -62,8 +65,15 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
+const BaseURL = "http://localhost:8080"
+
 export default {
   name: 'MainPage',
+  computed: {
+    uid() {
+      return this.$store.state.uid
+    }
+  },
   data () {
     return {
       show: false,
@@ -76,46 +86,30 @@ export default {
     })
   },
   methods: {
-    SighIn() {
-    const vm = this;
-    signInWithPopup(auth,provider)
-      .then(() => {
-        auth.currentUser.getIdToken(/* forceRefresh */ true)
-          .then((token) => {
-            // idTokenをサーバーに送信する処理
-            const xhr = new XMLHttpRequest();
-            xhr.onload = function() {
-              if (xhr.status === 200) {
-                console.log(xhr.responseText);
-              }
-            };
-            xhr.onerror = function(error) {
-              console.log(error);
-            };
+    async SighIn() {
+      try {
+        await signInWithPopup(auth, provider);
+        const token = await auth.currentUser.getIdToken(true);
+        const created_at = new Date(auth.currentUser.metadata.creationTime);
+        const loggedin_at = new Date(auth.currentUser.metadata.lastSignInTime);
 
-            var created_at = auth.currentUser.metadata.creationTime;
-            var now = new Date();
+        if (created_at < loggedin_at) {
+          const res = await axios.post(BaseURL + '/login', { "token": btoa(token) });
+          const data = JSON.stringify(res.data);
+          const json = JSON.parse(data);
+          this.$store.commit('setUid',json.user_id);
+        } else {
+          const res = await axios.post(BaseURL + '/register', { "token": btoa(token) });
+          const data = JSON.stringify(res.data);
+          const json = JSON.parse(data);
+          this.$store.commit('setUid',json.user_id);
+        }
 
-            if(created_at < now) {
-              xhr.open('POST', '/login');
-              xhr.setRequestHeader('Content-Type', 'application/json');
-              xhr.send(JSON.stringify({ "toke": btoa(token) }));
-              this.Success();
-              vm.$router.push('/menu');
-            } else {
-              xhr.open('POST', '/register');
-              xhr.setRequestHeader('Content-Type', 'application/json');
-              xhr.send(JSON.stringify({ "token": btoa(token) }));
-              this.Success();
-              vm.$router.push('/menu');
-            }
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }).catch(() => {
-        console.log("NG");
-      });
+        this.Success();
+        this.$router.push('/menu');
+      } catch (error) {
+        console.log(error);
+      }
     },
     WithOutSighIn(){
       this.$router.push('/menu');
@@ -123,6 +117,7 @@ export default {
     SignOut() {
       signOut(auth)
         .then(() => {
+          this.uid = "";
           this.Success();
           this.$router.push('/');
         })

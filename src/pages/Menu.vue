@@ -10,14 +10,6 @@
             </button>
 
             <button name="submit"
-                    @click="selectFile"
-                    class="rounded-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
-                    type="submit">
-                <input class="hidden" ref="fileInput" id="picture" type="file" accept="image/*" capture="environment">
-                写真を撮る
-            </button>
-
-            <button name="submit"
                     class="rounded-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
                     type="submit">
                 <router-link to="/history">履歴を見る</router-link>
@@ -26,7 +18,7 @@
 
         <button name="submit"
                 @click="SignOut"
-                class="rounded-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
+                class="rounded-full mt-40 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
                 type="submit">
             ログアウト
         </button>
@@ -38,15 +30,45 @@
 <script>
 import FooterComponet from '../components/Footer.vue'
 import HeaderComponet from '../components/Header.vue'
+import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
+import { initializeApp } from "firebase/app";
+
+const firebaseConfig = {
+  apiKey: process.env.VUE_APP_API_KEY,
+  authDomain: process.env.VUE_APP_AUTH_DOMAIN,
+  projectId: process.env.VUE_APP_PROJECT_ID,
+  storageBucket: process.env.VUE_APP_STORAGE_BACKET,
+  messagingSenderId: process.env.VUE_APP_MESSAGING_ID,
+  appId: process.env.VUE_APP_APP_ID,
+  measurementId: process.env.VUE_APP_MEASUREMENT_ID,
+};
+const app = initializeApp(firebaseConfig);
+const storage = getStorage(app);
+
 export default {
   components: {FooterComponet,HeaderComponet},
   name: 'MenuPage',
+  computed: {
+    img_url() {
+      return this.$store.state.img_url
+    }
+  },
+  mounted() {
+    this.$root.$on('UploadImage',(event) => {
+      this.UploadImage(event);
+    })
+  },
   methods: {
-    selectFile() {
-      this.$refs.fileInput.click();
-    },
     SignOut() {
       this.$root.$emit('SignOut');
+    },
+    async UploadImage(event) {
+      const file = event.target.files[0]
+      this.$store.commit('setImgUrl',URL.createObjectURL(file));
+      const storageRef = ref(storage,"files/"+file.name);
+      await uploadBytes(storageRef,file);
+      const res = await getDownloadURL(storageRef);
+      this.$store.commit('setImgUrl',res);
     }
   }
 }
