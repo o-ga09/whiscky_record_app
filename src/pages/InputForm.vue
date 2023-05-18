@@ -42,6 +42,25 @@
                         <svg-icon class="h-11 w-11 text-green-500" type="mdi" :path="camera"></svg-icon>
                     </label>
                 </div>
+
+                <p>ーーーーーーーーーーまたはーーーーーーーーー</p>
+
+                <div class="flex mt-12 h-12">
+                    <label 
+                        class="rounded-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
+                        for="picture"
+                    >
+                    <input
+                        class="hidden"  
+                        ref="fileInput" 
+                        id="picture" 
+                        type="file" 
+                        accept="image/*" 
+                        capture="environment" 
+                        @change="UploadImage">
+                        写真を撮る
+                    </label>
+                </div>
             </div>
         </div>
         <FooterComponent class="absolute w-full bottom-0 justify-center bg-amber-200"/>

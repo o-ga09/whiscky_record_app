@@ -9,21 +9,6 @@
                 <router-link to="/form">記録する</router-link>
             </button>
 
-            <label 
-              class="rounded-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
-              for="picture"
-            >
-              <input
-                class="hidden"  
-                ref="fileInput" 
-                id="picture" 
-                type="file" 
-                accept="image/*" 
-                capture="environment" 
-                @change="UploadImage">
-                写真を撮る
-            </label>
-
             <button name="submit"
                     class="rounded-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
                     type="submit">
