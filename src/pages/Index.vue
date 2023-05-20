@@ -65,7 +65,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-const BaseURL = "http://localhost:8080"
+const BaseURL = "https://appsrv01-j7f3gz3ima-an.a.run.app"
 
 export default {
   name: 'MainPage',

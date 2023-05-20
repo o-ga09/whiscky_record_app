@@ -77,7 +77,7 @@ import HeaderComponent from '../components/Header.vue'
 import FooterComponent from '../components/Footer.vue'
 import axios from 'axios';
 
-const BaseURL = "http://localhost:8080"
+const BaseURL = "https://appsrv01-j7f3gz3ima-an.a.run.app"
 
 export default {
     name: 'InputForm',
